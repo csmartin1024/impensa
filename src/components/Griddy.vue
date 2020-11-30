@@ -3,9 +3,13 @@
         <ul>
             <li class="wrapper" v-for="item in items" :key="item.id">
                 <div class="letter">{{ item.id }}</div>
-                <div class="letter">{{ item.name }}</div>
+                <div class="letter">{{ item.account_id }}</div>
+                <div class="letter">{{ item.amount }}</div>
+                <div class="letter">{{ item.category }}</div>
+                <div class="letter">{{ item.created_at }}</div>
+                <div class="letter">{{ item.merchant }}</div>
                 <div @click="updateChecked(item)" class="letter">
-                    {{ item.checked }}
+                    {{ item.notes }}
                 </div>
             </li>
         </ul>
@@ -34,7 +38,7 @@ export default class Griddy extends Vue {
 <style scoped lang="scss">
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .letter {
     background-color: #0069b3;

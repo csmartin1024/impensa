@@ -36,8 +36,8 @@ class Goop extends VuexModule {
 
     @MutationAction({ mutate: ['checked'] })
     async updateChecked(todo: Todo) {
-        todo.checked = !todo.checked;
-        const result = await Vue.axios.put(`/api/todo/${todo.id}`, todo);
+        // todo.checked = !todo.checked;
+        const result = await Vue.axios.put(`/api/expense/${todo.id}`, todo);
         return result.data;
         // return { checked: newChecked };
     }
@@ -64,7 +64,7 @@ class Goop extends VuexModule {
 
     @MutationAction({ mutate: ['goops'] })
     async loadGoops() {
-        const result = await Vue.axios.get('/api/todo');
+        const result = await Vue.axios.get('/api/expense');
         console.log(result);
         return { goops: result.data };
     }
