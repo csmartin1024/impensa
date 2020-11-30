@@ -3,7 +3,7 @@
         <div class="hello">
             <h1>{{ msg }}</h1>
         </div>
-        <div class="details" style="display:none">
+        <div class="details">
             <h6>Color</h6>
             <input :value="color" @input="updateColor($event.target.value)" />
 
@@ -29,6 +29,13 @@
             <h6>Viscosity</h6>
             <input
                 :value="viscosity"
+                @input="updateViscosity($event.target.value)"
+            />
+
+            <h6>Add</h6>
+            <input
+                value="Add Expense"
+                type="button"
                 @input="updateViscosity($event.target.value)"
             />
 

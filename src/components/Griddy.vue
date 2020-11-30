@@ -3,10 +3,10 @@
         <ul>
             <li class="wrapper" v-for="item in items" :key="item.id">
                 <div class="letter">{{ item.id }}</div>
-                <div class="letter">{{ item.account_id }}</div>
+                <div class="letter">{{ item.accountId }}</div>
                 <div class="letter">{{ item.amount }}</div>
                 <div class="letter">{{ item.category }}</div>
-                <div class="letter">{{ item.created_at }}</div>
+                <div class="letter">{{ item.createdAt }}</div>
                 <div class="letter">{{ item.merchant }}</div>
                 <div @click="updateChecked(item)" class="letter">
                     {{ item.notes }}
@@ -19,19 +19,25 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-const Goop = namespace('goop');
+const Expense = namespace('expense');
 
-interface Todo {
-    checked: boolean;
+interface Expense4 {
+    id: Identifier;
+    account_id: Identifier;
+    amount: number;
+    category: Category;
+    merchant: string;
+    notes: string;
+    // created_at: moment
 }
 
 @Component
 export default class Griddy extends Vue {
     @Prop() private items!: [];
-    @Goop.State
+    @Expense.State
     public color!: string;
-    @Goop.Action
-    public updateChecked!: (todo: Todo) => Todo;
+    @Expense.Action
+    public updateChecked!: (expense: Expense4) => Expense4;
 }
 </script>
 

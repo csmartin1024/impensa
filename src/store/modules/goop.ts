@@ -3,6 +3,7 @@ import {
     Module,
     MutationAction,
     Action,
+    Mutation,
 } from 'vuex-module-decorators';
 import Vue from 'vue';
 import Vuex from 'vuex';
@@ -26,6 +27,7 @@ class Goop extends VuexModule {
     public texture = '';
     public viscosity = '';
     public checked = '';
+    public category = '';
     public goops = [];
 
     @MutationAction({ mutate: ['color'] })
@@ -59,7 +61,21 @@ class Goop extends VuexModule {
 
     @MutationAction({ mutate: ['viscosity'] })
     async updateViscosity(newViscosity: string) {
+        console.log(this.state);
         return { viscosity: newViscosity };
+    }
+
+    @Mutation
+    updateThing() {
+        alert(this.category);
+        // return { viscosity: newViscosity };
+    }
+
+    @Mutation
+    async updateCategory(newCategory: string) {
+        console.log('category will be ', newCategory);
+        this.category = newCategory;
+        // return { category: newCategory };
     }
 
     @MutationAction({ mutate: ['goops'] })
