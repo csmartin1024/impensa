@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import account from '@/store/modules/account';
 import expense from '@/store/modules/expense';
 import goop from '@/store/modules/goop';
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     },
     actions: {},
     modules: {
+        account,
         expense,
         goop,
     },

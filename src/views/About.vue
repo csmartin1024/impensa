@@ -1,16 +1,16 @@
 <template>
     <div class="about">
-        <Griddy />
+        <ExpenseList />
     </div>
 </template>
 
 <script>
-import Griddy from '@/components/Griddy.vue';
+import ExpenseList from '@/components/ExpenseList.vue';
 
 export default {
     name: 'About',
     components: {
-        Griddy,
+        ExpenseList,
     },
 };
 </script>

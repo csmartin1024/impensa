@@ -9,68 +9,57 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import Expense from '@/model/Expense';
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
 // interface Identifier {}
-type Identifier = {};
+// type Identifier = {};
 
 // interface Category {
 
 // }
 
-enum Category {
-    None,
-}
+// enum Category {
+//     None,
+// }
 
-interface Expense3 {
-    // id: Identifier;
-    accountId: Identifier;
-    amount: number;
-    category: Category;
-    merchant: string;
-    notes: string;
-    // created_at: moment
-}
-interface Expense4 {
-    id: Identifier;
-    accountId: Identifier;
-    amount: number;
-    category: Category;
-    merchant: string;
-    notes: string;
-    // created_at: moment
-}
+// interface Expense3 {
+//     // id: Identifier;
+//     accountId: number;
+//     amount: number;
+//     category: string;
+//     merchant: string;
+//     notes: string;
+//     // created_at: moment
+// }
+// interface Expense4 {
+//     id: number;
+//     accountId: number;
+//     amount: number;
+//     category: string;
+//     merchant: string;
+//     notes: string;
+//     // created_at: moment
+// }
+
 // Vue.axios.defaults.baseURL = 'http://localhost:8000/api';
 
 @Module({ namespaced: true })
-class Expense extends VuexModule {
-    // public account_id: Identifier | null = null;
-    // public amount = 0;
-    // public category: Category = Category.None;
-    // public merchant = '';
-    // public notes = '';
-    // public checked = '';
-    public expense: Expense3 = {
-        accountId: 1,
-        amount: 0,
-        category: Category.None,
-        merchant: '',
-        notes: '',
-    };
-    public expenses: Expense3[] = [];
+class ExpenseModule extends VuexModule {
+    public expenses: Expense[] = [];
 
-    @MutationAction({ mutate: ['expenses'] })
-    async createExpense(expense: Expense3) {
-        // todo.checked = !todo.checked;
-        console.log(expense);
-        // await Promise.resolve();
-        // const result = await Vue.axios.post('/api/expense', expense);
+    @Mutation
+    async addExpense(expense: Expense) {
+        this.expenses.unshift(expense);
+    }
+
+    @Action({ commit: 'addExpense' })
+    async createExpense(expense: Expense) {
+        const result = await Vue.axios.post('/api/expense', expense);
         // TODO: Add Error handling
-        // const expenses = this.expenses;
-        // expenses.unshift(result.data);
-        return { expenses: this.expenses };
+        return result.data;
     }
 
     // @MutationAction({ mutate: ['checked'] })
@@ -87,4 +76,4 @@ class Expense extends VuexModule {
         return { expenses: result.data };
     }
 }
-export default Expense;
+export default ExpenseModule;

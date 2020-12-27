@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>hello world 1</h1>
         <div class="hello">
             <h1>{{ msg }}</h1>
         </div>
@@ -42,14 +43,14 @@
             <!-- <button @click="loadGoops">Load Goops</button> -->
         </div>
         <!-- <div>{{ JSON.stringify(goops) }}</div> -->
-        <Griddy :items="goops" />
+        <ExpenseList :items="goops" />
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import Griddy from '@/components/Griddy.vue';
+import ExpenseList from '@/components/ExpenseList.vue';
 
 const Goop = namespace('goop');
 
@@ -57,12 +58,12 @@ const Goop = namespace('goop');
 @Component({
     name: 'HelloWorld',
     components: {
-        Griddy,
+        ExpenseList,
     },
 })
 export default class HelloWorld extends Vue {
     // components: {
-    //     Griddy;
+    //     ExpenseList;
     // };
     // $refs!: {
     //     helloComponent: Griddy;
