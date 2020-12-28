@@ -57,6 +57,15 @@
                     </option>
                 </select>
                 <input
+                    name="notes"
+                    class="form-input-element"
+                    id="notes"
+                    autocomplete="off"
+                    placeholder="Notes"
+                    type="text"
+                    v-model="notes"
+                />
+                <input
                     class="form-button-element"
                     value="Add Expense Now"
                     type="button"

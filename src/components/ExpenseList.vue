@@ -63,8 +63,10 @@ interface Expense4 {
             return dayjs(value).format('hh:mm A');
         },
         NoNull(value: string | null | undefined): string {
-            console.log(value);
-            return value === 'null' || value === null || value === undefined
+            return value === '' ||
+                value === 'null' ||
+                value === null ||
+                value === undefined
                 ? 'None'
                 : value;
         },
