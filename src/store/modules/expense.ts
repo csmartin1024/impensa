@@ -46,17 +46,21 @@ Vue.use(VueAxios, axios);
 
 // Vue.axios.defaults.baseURL = 'http://localhost:8000/api';
 
+interface ExpenseResponse {
+    expenses: Expense[];
+}
+
 @Module({ namespaced: true })
 class ExpenseModule extends VuexModule {
     public expenses: Expense[] = [];
 
     @Mutation
-    async addExpense(expense: Expense) {
+    async addExpense(expense: Expense): Promise<void> {
         this.expenses.unshift(expense);
     }
 
     @Action({ commit: 'addExpense' })
-    async createExpense(expense: Expense) {
+    async createExpense(expense: Expense): Promise<Expense> {
         const result = await Vue.axios.post('/api/expense', expense);
         // TODO: Add Error handling
         return result.data;
@@ -71,7 +75,7 @@ class ExpenseModule extends VuexModule {
     // }
 
     @MutationAction({ mutate: ['expenses'] })
-    async loadExpenses() {
+    async loadExpenses(): Promise<ExpenseResponse> {
         const result = await Vue.axios.get('/api/expense');
         return { expenses: result.data };
     }

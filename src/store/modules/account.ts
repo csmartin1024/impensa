@@ -1,10 +1,4 @@
-import {
-    VuexModule,
-    Module,
-    MutationAction,
-    Action,
-    Mutation,
-} from 'vuex-module-decorators';
+import { VuexModule, Module, MutationAction } from 'vuex-module-decorators';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
@@ -13,6 +7,10 @@ import Account from '@/model/Account';
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
+
+interface AccountResponse {
+    accounts: Account[];
+}
 
 @Module({ namespaced: true })
 class AccountModule extends VuexModule {
@@ -31,7 +29,7 @@ class AccountModule extends VuexModule {
     // }
 
     @MutationAction({ mutate: ['accounts'] })
-    async loadAccounts() {
+    async loadAccounts(): Promise<AccountResponse> {
         const result = await Vue.axios.get('/api/account');
         return { accounts: result.data };
     }

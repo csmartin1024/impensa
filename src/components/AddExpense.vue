@@ -45,10 +45,16 @@
                     data-error="Please select one option."
                     v-model="accountId"
                 >
-                    <option :value=null
-                        >What payment method did you use?</option
+                    <option :value="null">
+                        What payment method did you use?
+                    </option>
+                    <option
+                        v-for="l in accounts"
+                        v-bind:key="l.id"
+                        :value="l.id"
                     >
-                    <option v-for="l in accounts" v-bind:key="l.id" :value="l.id">{{ l.name }}</option>
+                        {{ l.name }}
+                    </option>
                 </select>
                 <input
                     class="form-button-element"
@@ -89,18 +95,18 @@ export default class AddExpense extends Vue {
     // @VModel({type: Number})
     amount: null | string = null;
 
-    @VModel({type: String})
+    @VModel({ type: String })
     category: null | string = null;
 
-    @VModel({type: String})
+    @VModel({ type: String })
     merchant: null | string = null;
 
-    @VModel({type: String})
+    @VModel({ type: String })
     accountId: null | string = null;
 
-    @VModel({type: String})
+    @VModel({ type: String })
     notes: null | string = null;
-     
+
     // expense: Expense = {
     //     amount: null,
     //     category: null,
@@ -115,15 +121,21 @@ export default class AddExpense extends Vue {
     @AccountModule.Action
     public loadAccounts!: () => [];
 
-    someFnc(val: unknown) {
+    someFnc(): void {
         const { amount, accountId, category, merchant, notes } = this;
-        if(!amount || !accountId || !merchant || !category){
-            alert('You missed some fields')
+        if (!amount || !accountId || !merchant || !category) {
+            alert('You missed some fields');
             return;
         }
 
-        let convertedAmount = Number((parseFloat(amount) * 100.00).toFixed(2));
-        const expenseToCreate = { category: String(category), accountId: Number(accountId), merchant: String(merchant), amount: convertedAmount, notes: String(notes) };
+        let convertedAmount = Number((parseFloat(amount) * 100.0).toFixed(2));
+        const expenseToCreate = {
+            category: String(category),
+            accountId: Number(accountId),
+            merchant: String(merchant),
+            amount: convertedAmount,
+            notes: String(notes),
+        };
         this.createExpense(expenseToCreate);
         this.amount = null;
         this.category = null;
@@ -138,7 +150,7 @@ export default class AddExpense extends Vue {
     @ExpenseModule.Action
     public createExpense!: (expense: Expense) => [];
 
-    created() {
+    created(): void {
         this.loadAccounts();
         this.loadExpenses();
     }
@@ -146,20 +158,19 @@ export default class AddExpense extends Vue {
 </script>
 
 <style scoped lang="scss">
-
 .form-input-element {
-  padding: 1rem;
-  height: 2rem;
+    padding: 1rem;
+    height: 2rem;
 }
 
 .form-select-element {
-//   padding: 1rem;
-  height: 4rem;
+    //   padding: 1rem;
+    height: 4rem;
 }
 
 .form-button-element {
-//   padding: 1rem;
-  height: 2rem;
+    //   padding: 1rem;
+    height: 2rem;
 }
 
 .details {

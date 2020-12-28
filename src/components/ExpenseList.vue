@@ -43,8 +43,13 @@ export default class ExpenseList extends Vue {
     public color!: string;
     @Expense.Action
     public updateChecked!: (expense: Expense4) => Expense4;
-    lookupAccountName(accountId: number) {
-        return (this.accounts.find((acc: Record<string, unknown>) => accountId === acc.id) || { name: 'unknwon'}).name;
+
+    lookupAccountName(accountId: number): string {
+        return (
+            this.accounts.find(
+                (acc: Record<string, unknown>) => accountId === acc.id
+            ) || { name: 'unknwon' }
+        ).name;
     }
 }
 </script>
@@ -66,18 +71,18 @@ export default class ExpenseList extends Vue {
 }
 
 .cards {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .card {
-  background-color: green;
-  color: white;
-  padding: 1rem;
-  height: 5rem;
+    background-color: green;
+    color: white;
+    padding: 1rem;
+    height: 5rem;
 }
 
 // @media (min-width: 600px) {
@@ -87,5 +92,4 @@ export default class ExpenseList extends Vue {
 // @media (min-width: 900px) {
 //   .cards { grid-template-columns: repeat(3, 1fr); }
 // }
-
 </style>
