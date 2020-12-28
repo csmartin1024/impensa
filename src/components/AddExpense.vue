@@ -95,16 +95,16 @@ export default class AddExpense extends Vue {
     // @VModel({type: Number})
     amount: null | string = null;
 
-    @VModel({ type: String })
+    // @VModel({ type: String })
     category: null | string = null;
 
-    @VModel({ type: String })
+    // @VModel({ type: String })
     merchant: null | string = null;
 
-    @VModel({ type: String })
+    // @VModel({ type: String })
     accountId: null | string = null;
 
-    @VModel({ type: String })
+    // @VModel({ type: String })
     notes: null | string = null;
 
     // expense: Expense = {
@@ -174,8 +174,8 @@ export default class AddExpense extends Vue {
 }
 
 .details {
-    display: grid;
-    justify-items: center;
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
 }
 </style>
