@@ -45,7 +45,7 @@
                 data-error="Please select one option."
                 v-model="accountId"
             >
-                <option :value="null">What payment method did you use?</option>
+                <option :value="null">Select Your Payment Method</option>
                 <option v-for="l in accounts" v-bind:key="l.id" :value="l.id">
                     {{ l.name }}
                 </option>
