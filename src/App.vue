@@ -17,8 +17,17 @@
     color: #2c3e50;
 }
 
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
 #nav {
-    padding: 30px;
+    // padding: 30px;
 
     a {
         font-weight: bold;

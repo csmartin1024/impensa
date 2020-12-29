@@ -1,78 +1,67 @@
 <template>
     <div>
-        <h1>Money Tracker</h1>
-        <form>
-            <div class="details">
-                <input
-                    name="amount"
-                    class="form-input-element"
-                    id="amount"
-                    autocomplete="off"
-                    placeholder="Amount"
-                    type="number"
-                    v-model="amount"
-                    required="required"
-                    min="0"
-                    step="1"
-                    data-error="Please enter an amount."
-                />
-                <input
-                    name="merchant"
-                    class="form-input-element"
-                    id="merchant"
-                    autocomplete="off"
-                    placeholder="Merchant"
-                    type="text"
-                    v-model="merchant"
-                    required="required"
-                    data-error="Please enter your full name."
-                />
-                <input
-                    name="category"
-                    class="form-input-element"
-                    id="category"
-                    autocomplete="off"
-                    placeholder="Category"
-                    type="text"
-                    v-model="category"
-                    required="required"
-                    data-error="Please enter the category."
-                />
-                <select
-                    name="select_options"
-                    class="form-select-element"
-                    required="required"
-                    data-error="Please select one option."
-                    v-model="accountId"
-                >
-                    <option :value="null">
-                        What payment method did you use?
-                    </option>
-                    <option
-                        v-for="l in accounts"
-                        v-bind:key="l.id"
-                        :value="l.id"
-                    >
-                        {{ l.name }}
-                    </option>
-                </select>
-                <input
-                    name="notes"
-                    class="form-input-element"
-                    id="notes"
-                    autocomplete="off"
-                    placeholder="Notes"
-                    type="text"
-                    v-model="notes"
-                />
-                <input
-                    class="form-button-element"
-                    value="Add Expense Now"
-                    type="button"
-                    @click="someFnc"
-                />
-            </div>
+        <h1>Moneyz</h1>
+        <h4>New Expense</h4>
+        <form class="details">
+            <input
+                name="amount"
+                class="form-element"
+                id="amount"
+                autocomplete="off"
+                placeholder="Amount"
+                type="number"
+                v-model="amount"
+                required="required"
+                min="0"
+                step="1"
+                data-error="Please enter an amount."
+            />
+            <input
+                name="merchant"
+                class="form-element"
+                id="merchant"
+                autocomplete="off"
+                placeholder="Merchant"
+                type="text"
+                v-model="merchant"
+                required="required"
+                data-error="Please enter your full name."
+            />
+            <input
+                name="category"
+                class="form-element"
+                id="category"
+                autocomplete="off"
+                placeholder="Category"
+                type="text"
+                v-model="category"
+                required="required"
+                data-error="Please enter the category."
+            />
+            <select
+                name="select_options"
+                class="form-element"
+                required="required"
+                data-error="Please select one option."
+                v-model="accountId"
+            >
+                <option :value="null">What payment method did you use?</option>
+                <option v-for="l in accounts" v-bind:key="l.id" :value="l.id">
+                    {{ l.name }}
+                </option>
+            </select>
+            <input
+                name="notes"
+                class="form-element"
+                id="notes"
+                autocomplete="off"
+                placeholder="Notes"
+                type="text"
+                v-model="notes"
+            />
+            <button class="form-element button" @click="someFnc">Add</button>
         </form>
+        <h4>Expenses</h4>
         <ExpenseList :items="expenses" :accounts="accounts" />
     </div>
 </template>
@@ -101,28 +90,11 @@ export default class AddExpense extends Vue {
     @AccountModule.State
     public accounts!: Account[];
 
-    // @VModel({type: Number})
     amount: null | string = null;
-
-    // @VModel({ type: String })
     category: null | string = null;
-
-    // @VModel({ type: String })
     merchant: null | string = null;
-
-    // @VModel({ type: String })
     accountId: null | string = null;
-
-    // @VModel({ type: String })
     notes: null | string = null;
-
-    // expense: Expense = {
-    //     amount: null,
-    //     category: null,
-    //     merchant: null,
-    //     accountId: null,
-    //     notes: ''
-    // }
 
     @ExpenseModule.Action
     public loadExpenses!: () => [];
@@ -167,24 +139,36 @@ export default class AddExpense extends Vue {
 </script>
 
 <style scoped lang="scss">
-.form-input-element {
+h1 {
+    color: white;
+    background-color: green;
     padding: 1rem;
-    height: 2rem;
 }
-
-.form-select-element {
-    //   padding: 1rem;
-    height: 4rem;
-}
-
-.form-button-element {
-    //   padding: 1rem;
-    height: 2rem;
-}
-
 .details {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 1rem;
+}
+.form-element {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.3rem;
+}
+
+.hom {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .form-element {
+        width: 33%;
+        padding: 1rem;
+        margin: 0.3rem;
+    }
+    .hom {
+        display: block;
+    }
 }
 </style>
