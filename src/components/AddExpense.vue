@@ -102,7 +102,7 @@ export default class AddExpense extends Vue {
     @AccountModule.Action
     public loadAccounts!: () => [];
 
-    someFnc(): void {
+    someFnc(event: Event): void {
         const { amount, accountId, category, merchant, notes } = this;
         if (!amount || !accountId || !merchant || !category) {
             alert('You missed some fields');
@@ -123,6 +123,7 @@ export default class AddExpense extends Vue {
         this.merchant = null;
         this.accountId = null;
         this.notes = null;
+        event.preventDefault();
     }
 
     @ExpenseModule.Mutation
