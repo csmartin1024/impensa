@@ -63,6 +63,9 @@
         </form>
         <h4>Expenses</h4>
         <ExpenseList :items="expenses" :accounts="accounts" />
+        <button class="form-element button" @click="someOtherFnc">
+            Load More
+        </button>
     </div>
 </template>
 
@@ -97,11 +100,23 @@ export default class AddExpense extends Vue {
     notes: null | string = null;
 
     @ExpenseModule.Action
-    public loadExpenses!: () => [];
+    public loadExpenses!: ({ limit }: { limit: number }) => [];
 
     @AccountModule.Action
     public loadAccounts!: () => [];
 
+    @ExpenseModule.Action
+    public loadMoreExpenses!: ({
+        limit,
+        offset,
+    }: {
+        limit: number;
+        offset: number;
+    }) => [];
+
+    someOtherFnc(): void {
+        this.loadMoreExpenses({ limit: 5, offset: this.expenses.length + 1 });
+    }
     someFnc(event: Event): void {
         const { amount, accountId, category, merchant, notes } = this;
         if (!amount || !accountId || !merchant || !category) {
@@ -134,7 +149,7 @@ export default class AddExpense extends Vue {
 
     created(): void {
         this.loadAccounts();
-        this.loadExpenses();
+        this.loadExpenses({ limit: 5 });
     }
 }
 </script>

@@ -59,6 +59,25 @@ class ExpenseModule extends VuexModule {
         this.expenses.unshift(expense);
     }
 
+    @Mutation
+    async addMoreExpenses(expenses: Expense[]): Promise<void> {
+        this.expenses.push(...expenses);
+    }
+
+    @Action({ commit: 'addMoreExpenses' })
+    async loadMoreExpenses({
+        limit,
+        offset,
+    }: {
+        limit: number;
+        offset: number;
+    }): Promise<Expense> {
+        const result = await Vue.axios.get(
+            `/api/expense?limit=${limit}&offset=${offset}`
+        );
+        return result.data;
+    }
+
     @Action({ commit: 'addExpense' })
     async createExpense(expense: Expense): Promise<Expense> {
         const result = await Vue.axios.post('/api/expense', expense);
@@ -75,8 +94,8 @@ class ExpenseModule extends VuexModule {
     // }
 
     @MutationAction({ mutate: ['expenses'] })
-    async loadExpenses(): Promise<ExpenseResponse> {
-        const result = await Vue.axios.get('/api/expense');
+    async loadExpenses({ limit }: { limit: number }): Promise<ExpenseResponse> {
+        const result = await Vue.axios.get(`/api/expense?limit=${limit}`);
         return { expenses: result.data };
     }
 }
